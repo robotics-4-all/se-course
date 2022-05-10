@@ -1,0 +1,357 @@
+openapi: 3.0.0
+info:
+  description: RESTMARKS Demo API
+  version: 2.0.0
+  title: SE Course RESTMARKS API
+  contact:
+    email: klpanagi@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: admin
+    description: Secured Admin-only calls
+  - name: user
+    description: Simple user accounts
+
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create a new user account
+      operationId: createUser
+      description: |
+        FR1 - A user must be able to create a user account by providing
+        a username and a password
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      responses:
+        '400':
+          description: Bad input parameter
+        default:
+          description: successful operation
+  /user/login:
+    put:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: >
+        FR2 - A user must be able to login to his/her account by providing
+        his/her
+
+        username and password
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: Invalid username/password supplied
+  /user/{username}:
+    put:
+      tags:
+        - user
+      summary: Update user information
+      operationId: updateUser
+      description: |
+        FR3 - A user that is logged in to his account must be able to update his
+        password
+      parameters:
+        - in: path
+          name: username
+          description: user that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      responses:
+        '400':
+          description: Bad input parameter
+        default:
+          description: successful operation
+      security:
+        - JWTbearerAuth: []
+  /user/{username}/bookmark:
+    post:
+      tags:
+        - user
+      summary: Add Bookmark to user account
+      operationId: addBookmark
+      description: |
+        FR4 - A logged in user must be able to add a new bookmark to his account
+      parameters:
+        - in: path
+          name: username
+          description: user that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Bookmark'
+      responses:
+        '400':
+          description: Bad input parameter
+        default:
+          description: Successful operation
+      security:
+        - JWTbearerAuth: []
+    get:
+      tags:
+        - user
+      summary: Retrieve all bookmarks
+      operationId: getAllBookmarks
+      description: |
+        FR5 - A logged in user must be able to retrieve any bookmark from his
+        account
+        (FR10)
+      parameters:
+        - in: path
+          name: username
+          description: The username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllBookmarks'
+        '400':
+          description: Bad input parameter
+      security:
+        - JWTbearerAuth: []
+  /user/{username}/bookmark/{bookmark_id}:
+    get:
+      tags:
+        - user
+      summary: Retrieve bookmark
+      operationId: getBookmark
+      description: |
+        FR5 - A logged in user must be able to retrieve any bookmark from his
+        account
+      parameters:
+        - in: path
+          name: username
+          description: The username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookmark_id
+          description: The ID of the bookmark
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bookmark'
+        '400':
+          description: Bad input parameter
+      security:
+        - JWTbearerAuth: []
+    delete:
+      tags:
+        - user
+      summary: Delete bookmark from user account
+      operationId: deleteBookmark
+      description: |
+        FR6 - A logged in user must be able to delete any bookmark
+        from his account
+      parameters:
+        - in: path
+          name: username
+          description: The username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookmark_id
+          description: The ID of the bookmark
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad input parameter
+      security:
+        - JWTbearerAuth: []
+    put:
+      tags:
+        - user
+      summary: Update bookmark
+      operationId: updateBookmark
+      description: |
+        FR7 - A logged in user must be able to update any bookmark from his
+        account
+        FR8 - A logged in user must be able to mark his bookmarks as public or
+        private
+      parameters:
+        - in: path
+          name: username
+          description: The username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookmark_id
+          description: The ID of the bookmark
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Bookmark'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bookmark'
+        '400':
+          description: Bad input parameter
+      security:
+        - JWTbearerAuth: []
+  /user/{username}/bookmark/{bookmark_id}/tag:
+    post:
+      tags:
+        - user
+      summary: Add tag to bookmark
+      operationId: tagBookmark
+      description: |
+        FR9 - A logged in user must be able to add tags to his bookmarks
+      parameters:
+        - in: path
+          name: username
+          description: The username
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookmark_id
+          description: The ID of the bookmark
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: tag
+          description: Bookmark model
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad input parameter
+      security:
+        - JWTbearerAuth: []
+servers:
+  - url: //virtserver.swaggerhub.com/secoursetest
+components:
+  requestBodies:
+    Bookmark:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Bookmark'
+      description: Bookmark model
+      required: true
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: User model
+      required: true
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    JWTbearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT token
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+      xml:
+        name: User
+    Bookmark:
+      type: object
+      properties:
+        url:
+          type: string
+        status:
+          type: string
+        id:
+          type: integer
+      xml:
+        name: User
+    AllBookmarks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bookmark'
+    ComplexModel:
+      type: object
+      properties:
+        bookmark:
+          $ref: '#/components/schemas/Bookmark'
+        user:
+          $ref: '#/components/schemas/User'
