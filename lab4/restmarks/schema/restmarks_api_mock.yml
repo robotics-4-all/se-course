@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  description: RESTMARKS Demo API
+  description: This is a simple API
   version: 2.0.0
   title: SE Course RESTMARKS API
   contact:
@@ -8,6 +8,10 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://r4a-platform.ddns.net:8676    # The "url: " prefix is required
+
 tags:
   - name: admin
     description: Secured Admin-only calls
@@ -31,6 +35,21 @@ paths:
           description: Bad input parameter
         default:
           description: successful operation
+
+    get:
+      tags:
+        - admin
+      summary: Get user accounts
+      operationId: getUsers
+      description: |
+        FR1 - A user must be able to create a user account by providing
+        a username and a password
+      responses:
+        '400':
+          description: Bad input parameter
+        default:
+          description: successful operation
+
   /user/login:
     put:
       tags:
@@ -282,8 +301,7 @@ paths:
           description: Bad input parameter
       security:
         - JWTbearerAuth: []
-servers:
-  - url: //virtserver.swaggerhub.com/secoursetest
+
 components:
   requestBodies:
     Bookmark:
