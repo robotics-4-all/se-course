@@ -88,10 +88,6 @@ paths:
               schema:
                 type: string
                 format: date-time
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Token'
         '400':
           description: Invalid username/password supplied
   /user/{username}:
@@ -117,8 +113,7 @@ paths:
           description: Bad input parameter
         default:
           description: successful operation
-      security:
-        - JWTbearerAuth: []
+
   /user/{username}/bookmark:
     post:
       tags:
@@ -141,8 +136,7 @@ paths:
           description: Bad input parameter
         default:
           description: Successful operation
-      security:
-        - JWTbearerAuth: []
+
     get:
       tags:
         - user
@@ -168,8 +162,6 @@ paths:
                 $ref: '#/components/schemas/AllBookmarks'
         '400':
           description: Bad input parameter
-      security:
-        - JWTbearerAuth: []
   /user/{username}/bookmark/{bookmark_id}:
     get:
       tags:
@@ -201,8 +193,6 @@ paths:
                 $ref: '#/components/schemas/Bookmark'
         '400':
           description: Bad input parameter
-      security:
-        - JWTbearerAuth: []
     delete:
       tags:
         - user
@@ -229,8 +219,6 @@ paths:
           description: Successful operation
         '400':
           description: Bad input parameter
-      security:
-        - JWTbearerAuth: []
     put:
       tags:
         - user
@@ -265,8 +253,7 @@ paths:
                 $ref: '#/components/schemas/Bookmark'
         '400':
           description: Bad input parameter
-      security:
-        - JWTbearerAuth: []
+
   /user/{username}/bookmark/{bookmark_id}/tag:
     post:
       tags:
@@ -299,8 +286,6 @@ paths:
           description: Successful operation
         '400':
           description: Bad input parameter
-      security:
-        - JWTbearerAuth: []
 
 components:
   requestBodies:
@@ -318,22 +303,8 @@ components:
             $ref: '#/components/schemas/User'
       description: User model
       required: true
-  securitySchemes:
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
-    JWTbearerAuth:
-      type: apiKey
-      name: Authorization
-      in: header
+
   schemas:
-    Token:
-      type: object
-      properties:
-        token:
-          type: string
-          description: JWT token
     User:
       type: object
       properties:
