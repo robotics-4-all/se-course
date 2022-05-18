@@ -66,7 +66,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/NewPet'
         default:
           description: unexpected error
           content:
@@ -122,7 +122,7 @@ components:
   schemas:
     Pet:
       allOf:
-        - $ref: '#/components/schemas/Pet'
+        - $ref: '#/components/schemas/NewPet'
         - type: object
           required:
           - id
@@ -134,12 +134,12 @@ components:
     NewPet:
       type: object
       required:
-        - name  
+        - name
       properties:
         name:
           type: string
         tag:
-          type: string    
+          type: string
 
     Error:
       type: object
