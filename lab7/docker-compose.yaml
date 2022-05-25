@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo
+    container_name: "mongodb"
+    ports:
+      - "27027:27017"
+    volumes:
+      - type: "volume"
+        source: "mongodb"
+        target: "/data/db"
+    networks:
+      - se-network
+    command: mongod
+
+  nodered:
+    image: nodered/node-red:latest
+    container_name: "nodered"
+    ports:
+      - "2880:1880"
+    volumes:
+      - type: "volume"
+        source: "nodered"
+        target: "/data"
+    networks:
+      - se-network
+
+volumes:
+  mongodb:
+  nodered:
+
+networks:
+  se-network:
+    driver: bridge
