@@ -3,7 +3,7 @@ version: "3.7"
 services:
   mongodb:
     image: mongo
-    container_name: "mongodb"
+    container_name: "se-mongodb"
     ports:
       - "27027:27017"
     volumes:
@@ -16,7 +16,7 @@ services:
 
   nodered:
     image: nodered/node-red:latest
-    container_name: "nodered"
+    container_name: "se-nodered"
     ports:
       - "2880:1880"
     volumes:
