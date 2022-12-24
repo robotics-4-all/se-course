@@ -1,0 +1,57 @@
+TopicMsgParamGoal GasRaised -> {
+    topic: "kitchen.gas";
+    condition: "gas" > 0.3;
+}
+
+TopicMsgParamGoal AlarmEnabled -> {
+    topic: "alarm";
+    condition: "state" == 1;
+}
+
+TopicMsgParamGoal ThermostatKitchenDisabled -> {
+    topic: "kitchen.thermostat";
+    condition: "state" == 0;
+}
+
+TopicMsgParamGoal ThermostatBedroomDisabled -> {
+    topic: "bedroom.thermostat";
+    condition: "state" == 0;
+}
+
+TopicMsgParamGoal ThermostatLivingroomDisabled -> {
+    topic: "livingroom.thermostat";
+    condition: "state" == 0;
+}
+
+TopicMsgParamGoal ThermostatBathroomDisabled -> {
+    topic: "bathroom.thermostat";
+    condition: "state" == 0;
+}
+
+TopicMsgParamGoal ThermostatCorridorDisabled -> {
+    topic: "corridor.thermostat";
+    condition: "state" == 0;
+}
+
+ComplexGoal Complex -> {
+    algorithm: ALL_ACCOMPLISHED;
+    addGoal(AlarmEnabled);
+    addGoal(ThermostatKitchenDisabled);
+    addGoal(ThermostatBedroomDisabled);
+    addGoal(ThermostatBathroomDisabled);
+    addGoal(ThermostatLivingroomDisabled);
+    addGoal(ThermostatCorridorDisabled);
+}
+
+RedisBroker LocalRedis -> {
+    host: 'localhost';
+    port: 6379;
+    db: 0;
+    auth: AuthPlain('', '');  // AuthPlain(username, password)
+}
+
+Target MyAppTarget -> {
+    goals: [GasRaised, Complex];
+    middleware: LocalRedis;
+    concurrent: True;
+}
