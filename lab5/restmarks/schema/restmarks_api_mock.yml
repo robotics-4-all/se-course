@@ -10,7 +10,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: http://r4a-platform.ddns.net:8676    # The "url: " prefix is required
+  - url: http://milarakis.ee.auth.gr:8677    # The "url: " prefix is required
 
 
 paths:
