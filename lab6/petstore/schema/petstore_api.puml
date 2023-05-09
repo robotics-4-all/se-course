@@ -1,0 +1,61 @@
+@startuml
+hide empty members
+set namespaceSeparator none
+
+interface "/pet" {
+}
+
+class "GET /pet" {
+.. query ..
+{field} string[] tags
+{field} integer limit
+.. responses ..
+200: {field} <i>not specified</i> 
+default: {field} <i>not specified</i> 
+}
+
+
+
+class "POST /pet" {
+
+.. responses ..
+200: {field} <i>not specified</i> 
+default: {field} <i>not specified</i> 
+}
+
+
+
+"/pet" ..> "GET /pet"
+"/pet" ..> "POST /pet"
+
+
+
+interface "/pet/{id}" {
+}
+
+class "GET /pet/{id}" {
+.. path ..
+{field} integer <b>id</b>
+.. responses ..
+200: {field} <i>not specified</i> 
+default: {field} <i>not specified</i> 
+}
+
+
+
+class "DELETE /pet/{id}" {
+.. path ..
+{field} integer <b>id</b>
+.. responses ..
+204: {field} <i>not specified</i> 
+default: {field} <i>not specified</i> 
+}
+
+
+
+"/pet/{id}" ..> "DELETE /pet/{id}"
+"/pet/{id}" ..> "GET /pet/{id}"
+
+
+
+@enduml
