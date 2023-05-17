@@ -1,26 +1,5 @@
 [
     {
-        "id": "182335e2.99f052",
-        "type": "tab",
-        "label": "MongoDB Operations",
-        "disabled": false,
-        "info": ""
-    },
-    {
-        "id": "3473d672.55b542",
-        "type": "tab",
-        "label": "REST Service Example",
-        "disabled": false,
-        "info": ""
-    },
-    {
-        "id": "a712887f.cb747",
-        "type": "tab",
-        "label": "REST Service Call Example",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "fd0f986b.1c9ad8",
         "type": "tab",
         "label": "HTTP Web Page Example",
@@ -42,13 +21,6 @@
         "info": ""
     },
     {
-        "id": "4d1359bb.bef6a8",
-        "type": "tab",
-        "label": "HTTP Respone JSON 2",
-        "disabled": true,
-        "info": ""
-    },
-    {
         "id": "f23ec8d3.c89a3",
         "type": "tab",
         "label": "HTTP Respone JSON 2",
@@ -56,42 +28,607 @@
         "info": ""
     },
     {
+        "id": "4d1359bb.bef6a8",
+        "type": "tab",
+        "label": "HTTP Respone JSON 2",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "a712887f.cb747",
+        "type": "tab",
+        "label": "REST Service Call Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "182335e2.99f052",
+        "type": "tab",
+        "label": "MongoDB Operations",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3473d672.55b542",
+        "type": "tab",
+        "label": "REST Service Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "5d8b85ac.6515ec",
         "type": "mongodb",
-        "z": "",
-        "hostname": "r4a-nodered-mongo",
+        "hostname": "se-mongodb",
+        "topology": "direct",
+        "connectOptions": "",
         "port": "27017",
         "db": "test",
         "name": ""
     },
     {
-        "id": "31b3677b.1bd298",
-        "type": "mongodb in",
-        "z": "182335e2.99f052",
-        "mongodb": "5d8b85ac.6515ec",
+        "id": "12a90658.be8cd2",
+        "type": "http in",
+        "z": "fd0f986b.1c9ad8",
         "name": "",
-        "collection": "user",
-        "operation": "find",
-        "x": 770,
-        "y": 520,
+        "url": "/hello",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 480,
+        "y": 280,
         "wires": [
             [
-                "54bc4ed4.74989"
+                "2ad1692b.c16bc6"
             ]
         ]
+    },
+    {
+        "id": "2ad1692b.c16bc6",
+        "type": "template",
+        "z": "fd0f986b.1c9ad8",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello World!</h1>\n    </body>\n</html>",
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "c4d399ee.79b52"
+            ]
+        ]
+    },
+    {
+        "id": "c4d399ee.79b52",
+        "type": "http response",
+        "z": "fd0f986b.1c9ad8",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 780,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c70b9bb8.32a5d8",
+        "type": "comment",
+        "z": "fd0f986b.1c9ad8",
+        "name": "http://milarakis.ee.auth.gr:2880/hello",
+        "info": "",
+        "x": 580,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "df0732dc.667ce8",
+        "type": "template",
+        "z": "7abefd83.704014",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.query.name}}!</h1>\n    </body>\n</html>",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "5425f847.960a"
+            ]
+        ]
+    },
+    {
+        "id": "dec142cc.796bf",
+        "type": "http in",
+        "z": "7abefd83.704014",
+        "name": "",
+        "url": "/hello-query",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 440,
+        "y": 240,
+        "wires": [
+            [
+                "df0732dc.667ce8"
+            ]
+        ]
+    },
+    {
+        "id": "5425f847.960a",
+        "type": "http response",
+        "z": "7abefd83.704014",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 760,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a4ad8475.9409e8",
+        "type": "comment",
+        "z": "7abefd83.704014",
+        "name": "http://milarakis.ee.auth.gr:2880/hello-query?name=klpanagi",
+        "info": "",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "54d9d503.55cfac",
+        "type": "http response",
+        "z": "b01be559.76e07",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 860,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5b19427.8fa0a3c",
+        "type": "template",
+        "z": "b01be559.76e07",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.params.name}}!</h1>\n    </body>\n</html>",
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "54d9d503.55cfac"
+            ]
+        ]
+    },
+    {
+        "id": "32df3642.1e3c2a",
+        "type": "http in",
+        "z": "b01be559.76e07",
+        "name": "",
+        "url": "/hello-param/:name/",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "5b19427.8fa0a3c"
+            ]
+        ]
+    },
+    {
+        "id": "fb2c79a7.71b2e",
+        "type": "comment",
+        "z": "b01be559.76e07",
+        "name": "http://milarakis.ee.auth.gr:2880/hello-param/klpanagi",
+        "info": "",
+        "x": 490,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "085cb1fd2e6cfa63",
+        "type": "http response",
+        "z": "b01be559.76e07",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 860,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "56ac89f73397e9de",
+        "type": "template",
+        "z": "b01be559.76e07",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.params.name}}!</h1>\n        <h1>Book ID {{req.params.book_id}}!</h1>\n    </body>\n</html>",
+        "x": 690,
+        "y": 400,
+        "wires": [
+            [
+                "085cb1fd2e6cfa63"
+            ]
+        ]
+    },
+    {
+        "id": "03e989043d66cce7",
+        "type": "http in",
+        "z": "b01be559.76e07",
+        "name": "",
+        "url": "/hello-param/:name/book/:book_id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "56ac89f73397e9de"
+            ]
+        ]
+    },
+    {
+        "id": "f421529106886dc9",
+        "type": "comment",
+        "z": "b01be559.76e07",
+        "name": "http://milarakis.ee.auth.gr:2880/hello-param/klpanagi/book/1948",
+        "info": "",
+        "x": 530,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "825c40e2.f09fe8",
+        "type": "http in",
+        "z": "f23ec8d3.c89a3",
+        "name": "",
+        "url": "/json-response",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "36d1781f.cd8a88"
+            ]
+        ]
+    },
+    {
+        "id": "36d1781f.cd8a88",
+        "type": "template",
+        "z": "f23ec8d3.c89a3",
+        "name": "create-response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"a\": 1,\n    \"b\": \"test\",\n    \"c\": [1, 2, 3],\n    \"d\": {\n        \"d_1\": 0\n    }\n}",
+        "x": 728,
+        "y": 300,
+        "wires": [
+            [
+                "1d5cc6a4.b33b21"
+            ]
+        ]
+    },
+    {
+        "id": "1d5cc6a4.b33b21",
+        "type": "http response",
+        "z": "f23ec8d3.c89a3",
+        "name": "response",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "312428a.3ae5858",
+        "type": "comment",
+        "z": "f23ec8d3.c89a3",
+        "name": "http://milarakis.ee.auth.gr:2880/json-response",
+        "info": "",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "998e67c5.bd95a8",
+        "type": "inject",
+        "z": "f23ec8d3.c89a3",
+        "name": "Call HTTP Endpoint",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 490,
+        "y": 400,
+        "wires": [
+            [
+                "9e96a120.8433d8"
+            ]
+        ]
+    },
+    {
+        "id": "5e6c90da.bf4fd",
+        "type": "debug",
+        "z": "f23ec8d3.c89a3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "9e96a120.8433d8",
+        "type": "http request",
+        "z": "f23ec8d3.c89a3",
+        "name": "[GET] /json-response",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://milarakis.ee.auth.gr:2880/json-response",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 740,
+        "y": 400,
+        "wires": [
+            [
+                "5e6c90da.bf4fd"
+            ]
+        ]
+    },
+    {
+        "id": "69585bdc.4d1b14",
+        "type": "http in",
+        "z": "4d1359bb.bef6a8",
+        "name": "",
+        "url": "/json-response",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 422,
+        "y": 260,
+        "wires": [
+            [
+                "dcc0ed8.f620c1"
+            ]
+        ]
+    },
+    {
+        "id": "dcc0ed8.f620c1",
+        "type": "template",
+        "z": "4d1359bb.bef6a8",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"a\": 1,\n    \"b\": \"test\",\n    \"c\": [1, 2, 3],\n    \"d\": {\n        \"d_1\": 0\n    }\n}",
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "b67a27cf.ccf77"
+            ]
+        ]
+    },
+    {
+        "id": "b67a27cf.ccf77",
+        "type": "change",
+        "z": "4d1359bb.bef6a8",
+        "name": "Set Headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "application/json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 260,
+        "wires": [
+            [
+                "66c8494a.bf4758"
+            ]
+        ]
+    },
+    {
+        "id": "66c8494a.bf4758",
+        "type": "http response",
+        "z": "4d1359bb.bef6a8",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 940,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1aef5ab3.4c05d5",
+        "type": "comment",
+        "z": "4d1359bb.bef6a8",
+        "name": "https://r4a-platform.ddns.net:8443/nodered/json-response",
+        "info": "",
+        "x": 710,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "34b9e96.e7dfa16",
+        "type": "inject",
+        "z": "4d1359bb.bef6a8",
+        "name": "Call HTTP Endpoint",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "7010f616.37e598"
+            ]
+        ]
+    },
+    {
+        "id": "4d053d27.97013c",
+        "type": "debug",
+        "z": "4d1359bb.bef6a8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 910,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7010f616.37e598",
+        "type": "http request",
+        "z": "4d1359bb.bef6a8",
+        "name": "[GET] /json-response",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "https://r4a-platform.ddns.net:8443/nodered/json-response",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 700,
+        "y": 440,
+        "wires": [
+            [
+                "4d053d27.97013c"
+            ]
+        ]
+    },
+    {
+        "id": "3c39a530.07616a",
+        "type": "http request",
+        "z": "a712887f.cb747",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://milarakis.ee.auth.gr:2880/user/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "d86d6c8d.0e4ef8"
+            ]
+        ]
+    },
+    {
+        "id": "a1795717.d9584",
+        "type": "inject",
+        "z": "a712887f.cb747",
+        "name": "GetUsers",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 420,
+        "y": 220,
+        "wires": [
+            [
+                "3c39a530.07616a"
+            ]
+        ]
+    },
+    {
+        "id": "d86d6c8d.0e4ef8",
+        "type": "debug",
+        "z": "a712887f.cb747",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 860,
+        "y": 220,
+        "wires": []
     },
     {
         "id": "44b760c5.425738",
         "type": "inject",
         "z": "182335e2.99f052",
         "name": "Get Users",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
         "x": 440,
         "y": 520,
         "wires": [
@@ -115,6 +652,46 @@
         "wires": []
     },
     {
+        "id": "a74548db.609f08",
+        "type": "inject",
+        "z": "182335e2.99f052",
+        "name": "Add New User",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"name\":\"Maria\",\"email\":\"maria@test.gr\"}",
+        "payloadType": "json",
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "76cf13ba.9ea70c"
+            ]
+        ]
+    },
+    {
+        "id": "c7755525.5cf9d8",
+        "type": "comment",
+        "z": "182335e2.99f052",
+        "name": "Create User Account",
+        "info": "",
+        "x": 450,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "20dcefae.d28538",
+        "type": "comment",
+        "z": "182335e2.99f052",
+        "name": "{\"name\":\"Maria\",\"email\":\"maria@test.gr\"}",
+        "info": "",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
         "id": "76cf13ba.9ea70c",
         "type": "mongodb out",
         "z": "182335e2.99f052",
@@ -125,27 +702,23 @@
         "upsert": false,
         "multi": false,
         "operation": "insert",
-        "x": 770,
+        "x": 750,
         "y": 400,
         "wires": []
     },
     {
-        "id": "a74548db.609f08",
-        "type": "inject",
+        "id": "31b3677b.1bd298",
+        "type": "mongodb in",
         "z": "182335e2.99f052",
-        "name": "Add New User",
-        "topic": "",
-        "payload": "{\"name\":\"Maria\",\"email\":\"maria@test.gr\"}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 450,
-        "y": 400,
+        "mongodb": "5d8b85ac.6515ec",
+        "name": "",
+        "collection": "user",
+        "operation": "find",
+        "x": 750,
+        "y": 520,
         "wires": [
             [
-                "76cf13ba.9ea70c"
+                "54bc4ed4.74989"
             ]
         ]
     },
@@ -294,23 +867,6 @@
         "x": 1030,
         "y": 140,
         "wires": []
-    },
-    {
-        "id": "1b06885a.3b3838",
-        "type": "mongodb in",
-        "z": "3473d672.55b542",
-        "mongodb": "5d8b85ac.6515ec",
-        "name": "",
-        "collection": "user",
-        "operation": "find",
-        "x": 490,
-        "y": 140,
-        "wires": [
-            [
-                "89cc27b8.8fefc",
-                "11f5b75d.4ab621"
-            ]
-        ]
     },
     {
         "id": "89cc27b8.8fefc",
@@ -491,554 +1047,6 @@
         "wires": []
     },
     {
-        "id": "3c39a530.07616a",
-        "type": "http request",
-        "z": "a712887f.cb747",
-        "name": "",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "https://r4a-platform.ddns.net:8443/nodered/user/",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "authType": "",
-        "x": 630,
-        "y": 220,
-        "wires": [
-            [
-                "d86d6c8d.0e4ef8"
-            ]
-        ]
-    },
-    {
-        "id": "a1795717.d9584",
-        "type": "inject",
-        "z": "a712887f.cb747",
-        "name": "GetUsers",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 420,
-        "y": 220,
-        "wires": [
-            [
-                "3c39a530.07616a"
-            ]
-        ]
-    },
-    {
-        "id": "d86d6c8d.0e4ef8",
-        "type": "debug",
-        "z": "a712887f.cb747",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 860,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "c7755525.5cf9d8",
-        "type": "comment",
-        "z": "182335e2.99f052",
-        "name": "Create User Account",
-        "info": "",
-        "x": 450,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "20dcefae.d28538",
-        "type": "comment",
-        "z": "182335e2.99f052",
-        "name": "{\"name\":\"Maria\",\"email\":\"maria@test.gr\"}",
-        "info": "",
-        "x": 780,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "12a90658.be8cd2",
-        "type": "http in",
-        "z": "fd0f986b.1c9ad8",
-        "name": "",
-        "url": "/hello",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 480,
-        "y": 280,
-        "wires": [
-            [
-                "2ad1692b.c16bc6"
-            ]
-        ]
-    },
-    {
-        "id": "2ad1692b.c16bc6",
-        "type": "template",
-        "z": "fd0f986b.1c9ad8",
-        "name": "page",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello World!</h1>\n    </body>\n</html>",
-        "x": 630,
-        "y": 280,
-        "wires": [
-            [
-                "c4d399ee.79b52"
-            ]
-        ]
-    },
-    {
-        "id": "c4d399ee.79b52",
-        "type": "http response",
-        "z": "fd0f986b.1c9ad8",
-        "name": "response",
-        "statusCode": "",
-        "headers": {},
-        "x": 780,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "c70b9bb8.32a5d8",
-        "type": "comment",
-        "z": "fd0f986b.1c9ad8",
-        "name": "https://r4a-platform.ddns.net:8443/nodered/hello",
-        "info": "",
-        "x": 620,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "df0732dc.667ce8",
-        "type": "template",
-        "z": "7abefd83.704014",
-        "name": "page",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.query.name}}!</h1>\n    </body>\n</html>",
-        "x": 610,
-        "y": 240,
-        "wires": [
-            [
-                "5425f847.960a"
-            ]
-        ]
-    },
-    {
-        "id": "dec142cc.796bf",
-        "type": "http in",
-        "z": "7abefd83.704014",
-        "name": "",
-        "url": "/hello-query",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 440,
-        "y": 240,
-        "wires": [
-            [
-                "df0732dc.667ce8"
-            ]
-        ]
-    },
-    {
-        "id": "5425f847.960a",
-        "type": "http response",
-        "z": "7abefd83.704014",
-        "name": "response",
-        "statusCode": "",
-        "headers": {},
-        "x": 760,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "a4ad8475.9409e8",
-        "type": "comment",
-        "z": "7abefd83.704014",
-        "name": "https://r4a-platform.ddns.net:8443/nodered/hello-query?name=klpanagi",
-        "info": "",
-        "x": 590,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "54d9d503.55cfac",
-        "type": "http response",
-        "z": "b01be559.76e07",
-        "name": "response",
-        "statusCode": "",
-        "headers": {},
-        "x": 860,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "5b19427.8fa0a3c",
-        "type": "template",
-        "z": "b01be559.76e07",
-        "name": "page",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.params.name}}!</h1>\n        <h1>Book ID {{req.params.bid}}!</h1>\n    </body>\n</html>",
-        "x": 690,
-        "y": 240,
-        "wires": [
-            [
-                "54d9d503.55cfac"
-            ]
-        ]
-    },
-    {
-        "id": "32df3642.1e3c2a",
-        "type": "http in",
-        "z": "b01be559.76e07",
-        "name": "",
-        "url": "/hello-param/:name/book/:bid",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 440,
-        "y": 240,
-        "wires": [
-            [
-                "5b19427.8fa0a3c"
-            ]
-        ]
-    },
-    {
-        "id": "fb2c79a7.71b2e",
-        "type": "comment",
-        "z": "b01be559.76e07",
-        "name": "https://r4a-platform.ddns.net:8443/nodered/hello-param/klpanagi",
-        "info": "",
-        "x": 650,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "69585bdc.4d1b14",
-        "type": "http in",
-        "z": "4d1359bb.bef6a8",
-        "name": "",
-        "url": "/json-response",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 422,
-        "y": 260,
-        "wires": [
-            [
-                "dcc0ed8.f620c1"
-            ]
-        ]
-    },
-    {
-        "id": "dcc0ed8.f620c1",
-        "type": "template",
-        "z": "4d1359bb.bef6a8",
-        "name": "page",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n    \"a\": 1,\n    \"b\": \"test\",\n    \"c\": [1, 2, 3],\n    \"d\": {\n        \"d_1\": 0\n    }\n}",
-        "x": 610,
-        "y": 260,
-        "wires": [
-            [
-                "b67a27cf.ccf77"
-            ]
-        ]
-    },
-    {
-        "id": "b67a27cf.ccf77",
-        "type": "change",
-        "z": "4d1359bb.bef6a8",
-        "name": "Set Headers",
-        "rules": [
-            {
-                "t": "set",
-                "p": "headers",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "headers.content-type",
-                "pt": "msg",
-                "to": "application/json",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 770,
-        "y": 260,
-        "wires": [
-            [
-                "66c8494a.bf4758"
-            ]
-        ]
-    },
-    {
-        "id": "66c8494a.bf4758",
-        "type": "http response",
-        "z": "4d1359bb.bef6a8",
-        "name": "response",
-        "statusCode": "",
-        "headers": {},
-        "x": 940,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "1aef5ab3.4c05d5",
-        "type": "comment",
-        "z": "4d1359bb.bef6a8",
-        "name": "https://r4a-platform.ddns.net:8443/nodered/json-response",
-        "info": "",
-        "x": 710,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "34b9e96.e7dfa16",
-        "type": "inject",
-        "z": "4d1359bb.bef6a8",
-        "name": "Call HTTP Endpoint",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 450,
-        "y": 440,
-        "wires": [
-            [
-                "7010f616.37e598"
-            ]
-        ]
-    },
-    {
-        "id": "4d053d27.97013c",
-        "type": "debug",
-        "z": "4d1359bb.bef6a8",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 910,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "7010f616.37e598",
-        "type": "http request",
-        "z": "4d1359bb.bef6a8",
-        "name": "[GET] /json-response",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": false,
-        "url": "https://r4a-platform.ddns.net:8443/nodered/json-response",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "authType": "",
-        "x": 700,
-        "y": 440,
-        "wires": [
-            [
-                "4d053d27.97013c"
-            ]
-        ]
-    },
-    {
-        "id": "825c40e2.f09fe8",
-        "type": "http in",
-        "z": "f23ec8d3.c89a3",
-        "name": "",
-        "url": "/json-response",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 510,
-        "y": 300,
-        "wires": [
-            [
-                "36d1781f.cd8a88"
-            ]
-        ]
-    },
-    {
-        "id": "36d1781f.cd8a88",
-        "type": "template",
-        "z": "f23ec8d3.c89a3",
-        "name": "page",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n    \"a\": 1,\n    \"b\": \"test\",\n    \"c\": [1, 2, 3],\n    \"d\": {\n        \"d_1\": 0\n    }\n}",
-        "x": 698,
-        "y": 300,
-        "wires": [
-            [
-                "1d5cc6a4.b33b21"
-            ]
-        ]
-    },
-    {
-        "id": "1d5cc6a4.b33b21",
-        "type": "http response",
-        "z": "f23ec8d3.c89a3",
-        "name": "response",
-        "statusCode": "",
-        "headers": {
-            "content-type": "application/json"
-        },
-        "x": 860,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "312428a.3ae5858",
-        "type": "comment",
-        "z": "f23ec8d3.c89a3",
-        "name": "https://r4a-platform.ddns.net:8443/nodered/json-response",
-        "info": "",
-        "x": 670,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "998e67c5.bd95a8",
-        "type": "inject",
-        "z": "f23ec8d3.c89a3",
-        "name": "Call HTTP Endpoint",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": "3",
-        "x": 438,
-        "y": 400,
-        "wires": [
-            [
-                "9e96a120.8433d8"
-            ]
-        ]
-    },
-    {
-        "id": "5e6c90da.bf4fd",
-        "type": "debug",
-        "z": "f23ec8d3.c89a3",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 898,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "9e96a120.8433d8",
-        "type": "http request",
-        "z": "f23ec8d3.c89a3",
-        "name": "[GET] /json-response",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "https://r4a-platform.ddns.net:8443/nodered/json-response",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "authType": "",
-        "x": 688,
-        "y": 400,
-        "wires": [
-            [
-                "5e6c90da.bf4fd"
-            ]
-        ]
-    },
-    {
-        "id": "2e39d011.32969",
-        "type": "http in",
-        "z": "7abefd83.704014",
-        "name": "",
-        "url": "/test-hello-query",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 470,
-        "y": 340,
-        "wires": [
-            [
-                "4338c6e0.4587c8"
-            ]
-        ]
-    },
-    {
-        "id": "4338c6e0.4587c8",
-        "type": "template",
-        "z": "7abefd83.704014",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{req.query.name}}!</h1>\n        <h1>surname {{req.query.surname}}!</h1>\n    </body>\n</html>",
-        "output": "str",
-        "x": 700,
-        "y": 340,
-        "wires": [
-            [
-                "9ea29fe9.c6f118"
-            ]
-        ]
-    },
-    {
-        "id": "9ea29fe9.c6f118",
-        "type": "http response",
-        "z": "7abefd83.704014",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 910,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "19498089.61dfb7",
         "type": "http request",
         "z": "3473d672.55b542",
@@ -1089,18 +1097,35 @@
         "type": "inject",
         "z": "3473d672.55b542",
         "name": "GetUsers",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
         "x": 420,
         "y": 1040,
         "wires": [
             [
                 "19498089.61dfb7"
+            ]
+        ]
+    },
+    {
+        "id": "1b06885a.3b3838",
+        "type": "mongodb in",
+        "z": "3473d672.55b542",
+        "mongodb": "5d8b85ac.6515ec",
+        "name": "",
+        "collection": "user",
+        "operation": "find",
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "89cc27b8.8fefc",
+                "11f5b75d.4ab621"
             ]
         ]
     }
