@@ -4,8 +4,6 @@ services:
   mongodb:
     image: mongo
     container_name: "se-mongodb"
-    ports:
-      - "27027:27017"
     volumes:
       - type: "volume"
         source: "mongodb"
@@ -18,7 +16,7 @@ services:
     image: nodered/node-red:latest
     container_name: "se-nodered"
     ports:
-      - "2880:1880"
+      - "1880:1880"
     volumes:
       - type: "volume"
         source: "nodered"
