@@ -10,7 +10,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: http://milarakis.ee.auth.gr:8677    # The "url: " prefix is required
+  - url: http://issel10.ee.auth.gr:8677    # The "url: " prefix is required
 
 
 paths:
@@ -44,27 +44,22 @@ paths:
                 $ref: "#/components/schemas/AllUsers"
 
   /user/login:
-    put:
+    post:
       summary: Logs user into the system
       description: >
         FR2 - A user must be able to login to his/her account by providing
-        his/her
-
-        username and password
+        his/her username and password
       operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          schema:
-            type: string
+      requestBody:
+          content: 
+            multipart/form-data: # Media type
+              schema:            # Request payload
+                type: object
+                properties:      # Request parts
+                  username:
+                    type: string
+                  password:
+                    type: string
       responses:
         '200':
           description: Default response

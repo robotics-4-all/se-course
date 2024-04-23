@@ -18,5 +18,6 @@ services:
     environment:
       OPENAPI_MOCK_SPECIFICATION_URL: '/schema/restmarks_api_mock.yml'
       OPENAPI_MOCK_DEBUG: 1
+      OPENAPI_MOCK_CORS_ENABLED: 1
     ports:
       - "8677:8080"
