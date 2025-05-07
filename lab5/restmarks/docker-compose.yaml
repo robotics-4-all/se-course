@@ -4,15 +4,18 @@ services:
   restmarks_swagger_ui:
     image: swaggerapi/swagger-ui
     container_name: "restmarks_swagger_ui"
+    restart: unless-stopped
     ports:
       - "8676:8080"
     volumes:
       - ./schema/restmarks_api_mock.yml:/swagger.yml
     environment:
       SWAGGER_JSON: /swagger.yml
+
   restmarks_api_mock:
     container_name: restmarks_api_mock
     image: muonsoft/openapi-mock
+    restart: unless-stopped
     volumes:
       - ./schema:/schema
     environment:

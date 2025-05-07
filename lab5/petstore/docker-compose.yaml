@@ -4,15 +4,18 @@ services:
   petstore_swagger_ui:
     image: swaggerapi/swagger-ui
     container_name: "petstore_swagger_ui"
+    restart: unless-stopped
     ports:
       - "8678:8080"
     volumes:
       - ./schema/petstore_api.yaml:/swagger.yml
     environment:
       SWAGGER_JSON: /swagger.yml
+
   petstore_api_mock:
     container_name: petstore_api_mock
     image: muonsoft/openapi-mock
+    restart: unless-stopped
     volumes:
       - ./schema:/schema
     environment:
